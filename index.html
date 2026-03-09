@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Initiation</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<h1>
+    <span class="titleIcon">⚔️</span>
+    The Initiation
+    <span class="titleIcon">⚔️</span>
+</h1>
+
+
+<div id="controls">
+    <select id="enemySelect">
+        <option value="">▼</option>
+        <option value="Goblin">Goblin</option>
+        <option value="Orc">Orc</option>
+        <option value="Bandit">Bandit</option>
+        <option value="Skeleton">Skeleton</option>
+        <option value="Wolf">Wolf</option>
+    </select>
+
+    <button onclick="addCharacter()">Add Character</button>
+    <button onclick="rollAll()">Roll All</button>
+    <button onclick="deleteUnchecked()">Delete</button>
+    <br>
+    <button onclick="nextTurn()">Next Turn</button>
+</div>
+
+<div id="characterList"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
