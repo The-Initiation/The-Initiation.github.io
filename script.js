@@ -6,7 +6,9 @@ const premadeEnemies = {
     "Orc":      { name: "Orc",      init: "", hp: 15, ac: 13 },
     "Bandit":   { name: "Bandit",   init: "", hp: 11, ac: 12 },
     "Skeleton": { name: "Skeleton", init: "", hp: 13, ac: 13 },
-    "Wolf":     { name: "Wolf",     init: "", hp: 11, ac: 13 }
+    "Wolf":     { name: "Wolf",     init: "", hp: 11, ac: 13 },
+    "Zombie":   { name: "Zombie",   init: "", hp: 22, ac: 8 },
+    "Mimic":    { name: "Mimic",    init: "", hp: 58, ac: 12 },
 };
 
 const list = document.getElementById("characterList");
@@ -24,7 +26,7 @@ function getNextEnemyName(baseName) {
     const cards = Array.from(list.children);
     let count = 0;
     cards.forEach(card => {
-        const currentName = card.children[0].value;
+        const currentName = card.children[1].value;
         if (currentName.startsWith(baseName)) count++;
     });
     return `${baseName} ${count + 1}`;
@@ -95,6 +97,7 @@ function addCharacter(data = null) {
         saveToLocalStorage();
     }
 
+
     saveBox.onchange = () => {
         if (saveBox.checked) upsertSavedEntry();
         else {
@@ -118,7 +121,6 @@ deleteBtn.onclick = () => {
     card.remove();
 };
 
-
     function updateDeleteVisibility() {
         const hpValue = Number(hp.value) || 0;
         deleteBtn.style.display = hpValue < 5 ? "block" : "none";
@@ -135,12 +137,13 @@ deleteBtn.onclick = () => {
     };
 
     /* --- Build card --- */
+    card.appendChild(saveBox);
     card.appendChild(name);
     card.appendChild(init);
     card.appendChild(hp);
     card.appendChild(ac);
-    card.appendChild(saveBox);
     card.appendChild(deleteBtn);
+
 
     list.appendChild(card);
     updateDeleteVisibility();
@@ -153,8 +156,8 @@ deleteBtn.onclick = () => {
 function sortCards() {
     const cards = Array.from(list.children);
     cards.sort((a, b) => {
-        const initA = parseInt(a.children[1].value) || 0;
-        const initB = parseInt(b.children[1].value) || 0;
+        const initA = parseInt(a.children[2].value) || 0;
+        const initB = parseInt(b.children[2].value) || 0;
         return initB - initA;
     });
     cards.forEach(c => list.appendChild(c));
@@ -165,10 +168,10 @@ function sortCards() {
 function rollAll() {
     const cards = Array.from(list.children);
     cards.forEach(card => {
-        const saveBox = card.children[4];
+        const saveBox = card.children[0];
         if (!saveBox.checked) {
             const roll = Math.floor(Math.random() * 20) + 1;
-            card.children[1].value = roll;
+            card.children[2].value = roll;
         }
     });
     sortCards();
@@ -177,7 +180,7 @@ function rollAll() {
 function deleteUnchecked() {
     const cards = Array.from(list.children);
     cards.forEach(card => {
-        const saveBox = card.children[4];
+        const saveBox = card.children[0];
         if (!saveBox.checked) card.remove();
     });
     sortCards();
