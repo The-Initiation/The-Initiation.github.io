@@ -17,6 +17,9 @@ function saveToLocalStorage() {
     localStorage.setItem("savedCharacters", JSON.stringify(saved));
 }
 
+/* =========================
+   Enemy dropdown logic
+   ========================= */
 function getNextEnemyName(baseName) {
     const cards = Array.from(list.children);
     let count = 0;
@@ -72,6 +75,7 @@ function addCharacter(data = null) {
     const cardId = data?.id || `id_${Date.now()}_${Math.random().toString(36).slice(2)}`;
     card.dataset.id = cardId;
 
+    /* --- Save logic --- */
     function upsertSavedEntry() {
         if (!saveBox.checked) return;
 
@@ -92,9 +96,8 @@ function addCharacter(data = null) {
     }
 
     saveBox.onchange = () => {
-        if (saveBox.checked) {
-            upsertSavedEntry();
-        } else {
+        if (saveBox.checked) upsertSavedEntry();
+        else {
             saved = saved.filter(c => c.id !== cardId);
             saveToLocalStorage();
         }
@@ -102,23 +105,45 @@ function addCharacter(data = null) {
 
     [name, init, hp, ac].forEach(field => {
         field.oninput = () => {
-            if (saveBox.checked) {
-                upsertSavedEntry();
-            }
+            if (saveBox.checked) upsertSavedEntry();
         };
     });
 
+    /* --- Delete button (HP < 5) --- */
+    const deleteBtn = document.createElement("button");
+deleteBtn.innerHTML = "🗑️";  // bin icon
+deleteBtn.className = "deleteBtn";
+
+deleteBtn.onclick = () => {
+    card.remove();
+};
+
+
+    function updateDeleteVisibility() {
+        const hpValue = Number(hp.value) || 0;
+        deleteBtn.style.display = hpValue < 5 ? "block" : "none";
+    }
+
+    hp.oninput = () => {
+        updateDeleteVisibility();
+        if (saveBox.checked) upsertSavedEntry();
+    };
+
+    /* --- Sorting trigger --- */
     init.onblur = () => {
         sortCards();
     };
 
+    /* --- Build card --- */
     card.appendChild(name);
     card.appendChild(init);
     card.appendChild(hp);
     card.appendChild(ac);
     card.appendChild(saveBox);
+    card.appendChild(deleteBtn);
 
     list.appendChild(card);
+    updateDeleteVisibility();
     highlightTurn();
 }
 
@@ -153,9 +178,7 @@ function deleteUnchecked() {
     const cards = Array.from(list.children);
     cards.forEach(card => {
         const saveBox = card.children[4];
-        if (!saveBox.checked) {
-            card.remove();
-        }
+        if (!saveBox.checked) card.remove();
     });
     sortCards();
 }
@@ -165,26 +188,20 @@ function deleteUnchecked() {
    ========================= */
 function highlightTurn() {
     const cards = Array.from(list.children);
-
     cards.forEach((card, index) => {
         card.classList.toggle("currentTurn", index === currentTurnIndex);
     });
 }
-
 
 function nextTurn() {
     const cards = Array.from(list.children);
     if (cards.length === 0) return;
 
     currentTurnIndex++;
-
-    if (currentTurnIndex >= cards.length) {
-        currentTurnIndex = 0;
-    }
+    if (currentTurnIndex >= cards.length) currentTurnIndex = 0;
 
     highlightTurn();
 }
-
 
 /* =========================
    Initial load
