@@ -1,45 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="images/Logo.png">
-<meta charset="UTF-8">
-    <title>The Initiation</title>
-
-
-
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Knotty Crew Craft</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<h1>
-    <span class="titleIcon">⚔️</span>
-    The Initiation
-    <span class="titleIcon">⚔️</span>
-</h1>
+  <header class="hero">
+    <nav>
+      <div class="brand">The Knotty Crew Craft</div>
+      <div class="nav-links">
+        <a href="#crafts">Crafts</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
 
+    <section class="hero-content">
+      <img src="assets/knotty-crew-logo.png" alt="The Knotty Crew Craft logo" class="logo" />
+      <div>
+        <p class="eyebrow">Crochet • Cross Stitch • Assorted Craft</p>
+        <h1>Handmade in every stitch, made with love.</h1>
+        <p class="intro">Beautiful handmade crochet, cross stitch and assorted craft pieces by Tracey, Nicola and Liz.</p>
+        <a href="#contact" class="button">Contact The Crew</a>
+      </div>
+    </section>
+  </header>
 
-<div id="controls">
-    <select id="enemySelect">
-        <option value="" style="text-align: center;">▼</option>
-        <option value="Goblin">Goblin</option>
-        <option value="Orc">Orc</option>
-        <option value="Bandit">Bandit</option>
-        <option value="Skeleton">Skeleton</option>
-        <option value="Wolf">Wolf</option>
-        <option value="Zombie">Zombie</option>
-        <option value="Mimic">Mimic</option>
-    </select>
+  <main>
+    <section class="banner-preview">
+      <img src="assets/facebook-banner.png" alt="The Knotty Crew Craft Facebook banner" />
+    </section>
 
-    <button onclick="addCharacter()">Add Character</button>
-    <button onclick="rollAll()">Roll All</button>
-    <button onclick="deleteUnchecked()">Delete All</button>
-    <br> <br>
-    <button onclick="nextTurn()">Next Turn</button>
-</div>
+    <section id="crafts" class="section">
+      <h2>Our Crafts</h2>
+      <div class="cards">
+        <article>
+          <h3>Crochet</h3>
+          <p>Soft, cosy handmade crochet gifts, decorations and keepsakes.</p>
+        </article>
+        <article>
+          <h3>Cross Stitch</h3>
+          <p>Personal, detailed cross stitch designs with a homely handmade feel.</p>
+        </article>
+        <article>
+          <h3>Assorted Craft</h3>
+          <p>A mix of creative handmade items, perfect for gifts and special occasions.</p>
+        </article>
+      </div>
+    </section>
 
-<div id="characterList"></div>
+    <section id="about" class="section split">
+      <div>
+        <h2>About The Knotty Crew</h2>
+        <p>The Knotty Crew Craft is run by Tracey, Nicola and Liz, creating warm, thoughtful handmade pieces with a love of yarn, stitching and cosy craft details.</p>
+        <p>Facebook: <strong>The Knotty Crew and Crafts</strong></p>
+      </div>
+      <img src="assets/business-card.png" alt="The Knotty Crew Craft business card design" />
+    </section>
 
-<script src="script.js"></script>
+    <section id="contact" class="section contact">
+      <h2>Contact Us</h2>
+      <p class="main-email"><strong>Email:</strong> <a href="mailto:Knotty.Crews.Crafts@gmail.com">Knotty.Crews.Crafts@gmail.com</a></p>
 
+      <div class="contact-grid">
+        <div>
+          <h3>Tracey</h3>
+          <p><strong>Phone:</strong> <a href="tel:07919263285">07919 263285</a></p>
+          <p><strong>Email:</strong> <a href="mailto:Knotty.Crews.Crafts@gmail.com">Knotty.Crews.Crafts@gmail.com</a></p>
+          <p><strong>Facebook:</strong> The Knotty Crew and Crafts</p>
+        </div>
+        <div>
+          <h3>Nicola</h3>
+          <p><strong>Phone:</strong> <a href="tel:07704319990">07704 319990</a></p>
+          <p><strong>Email:</strong> <a href="mailto:Knotty.Crews.Crafts@gmail.com">Knotty.Crews.Crafts@gmail.com</a></p>
+          <p><strong>Facebook:</strong> The Knotty Crew and Crafts</p>
+        </div>
+        <div>
+          <h3>Liz</h3>
+          <p><strong>Phone:</strong> <a href="tel:07368452417">07368 452417</a></p>
+          <p><strong>Email:</strong> <a href="mailto:lizknottycrew@outlook.com">lizknottycrew@outlook.com</a></p>
+          <p><strong>Facebook:</strong> The Knotty Crew and Crafts</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© The Knotty Crew Craft • Crochet • Cross Stitch • Assorted Craft</p>
+  </footer>
 </body>
 </html>
